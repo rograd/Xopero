@@ -12,6 +12,4 @@ class SHA256Strategy : IHashStrategy
         byte[] hashBytes = sha256.ComputeHash(sourceBytes);
         return Convert.ToHexString(hashBytes);
     }
-
-    public override string ToString() => "sha256";
 }

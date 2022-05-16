@@ -1,10 +1,10 @@
-﻿namespace Hashing;
+namespace Hashing;
 
-class HashAlgorithm
+class HashFunction
 {
     private IHashStrategy _hashStrategy;
 
-    public HashAlgorithm(IHashStrategy hashStrategy)
+    public HashFunction(IHashStrategy hashStrategy)
     {
         _hashStrategy = hashStrategy;
     }

@@ -12,6 +12,4 @@ class MD5Strategy : IHashStrategy
         byte[] hashBytes = md5.ComputeHash(sourceBytes);
         return Convert.ToHexString(hashBytes);
     }
-
-    public override string ToString() => "md5";
 }

@@ -12,6 +12,4 @@ class SHA1Strategy : IHashStrategy
         byte[] hashBytes = sha1.ComputeHash(sourceBytes);
         return Convert.ToHexString(hashBytes);
     }
-
-    public override string ToString() => "sha1";
 }
