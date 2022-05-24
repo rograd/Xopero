@@ -1,12 +1,10 @@
-namespace Articles.Model;
-
-public class Category
+namespace Articles.Model
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-
-    public override string ToString()
+    public class Category
     {
-        return Name;
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public override string ToString() => Name;
     }
 }

@@ -1,9 +1,11 @@
-namespace Articles;
+using System.Windows.Forms;
 
-public partial class EditForm : Form
+namespace Articles
 {
-    private void InitializeComponent()
+    public partial class EditForm : Form
     {
+        private void InitializeComponent()
+        {
             this.tblInternalLayout = new System.Windows.Forms.TableLayoutPanel();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -182,18 +184,19 @@ public partial class EditForm : Form
             this.tblLayout.PerformLayout();
             this.ResumeLayout(false);
 
-    }
+        }
 
-    private TableLayoutPanel tblInternalLayout;
-    public TextBox txtTitle;
-    public TextBox txtContent;
-    private Label lblTitle;
-    private Label lblContent;
-    private Button btnSave;
-    private Button btnCancel;
-    private TableLayoutPanel tblLayout;
-    private Label lblId;
-    public TextBox txtId;
-    private ComboBox cboCategory;
-    private Label lblCategory;
+        private TableLayoutPanel tblInternalLayout;
+        public TextBox txtTitle;
+        public TextBox txtContent;
+        private Label lblTitle;
+        private Label lblContent;
+        private Button btnSave;
+        private Button btnCancel;
+        private TableLayoutPanel tblLayout;
+        private Label lblId;
+        public TextBox txtId;
+        private ComboBox cboCategory;
+        private Label lblCategory;
+    }
 }

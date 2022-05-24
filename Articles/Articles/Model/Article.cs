@@ -1,11 +1,14 @@
-﻿namespace Articles.Model;
+﻿using System;
 
-public class Article
+namespace Articles.Model
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Content { get; set; }
-    public Category Category { get; set; }
-    public DateTime DateCreated { get; set; }
-    public DateTime DateModified { get; set; }
+    public class Article
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public Category Category { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
+    }
 }
