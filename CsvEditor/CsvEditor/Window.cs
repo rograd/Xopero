@@ -9,7 +9,8 @@ namespace CsvEditor
 {
     public partial class Window : Form
     {
-        private char _separator;
+        private char[] _commonDelimiters = { ',', ';', '\t', ' ', '|' };
+        private char _delimiter;
         private string _fileName;
 
         public Window()
@@ -17,18 +18,39 @@ namespace CsvEditor
             InitializeComponent();
         }
 
+        private char RecognizeDelimiter(string text)
+        {
+            Dictionary<char, int> occurrences =
+                text.Where(character => _commonDelimiters.Contains(character))
+                    .GroupBy(character => character)
+                    .ToDictionary(c => c.Key, c => c.Count());
+
+            int maxOccurred = occurrences.Values.Max();
+            char delimiter =
+                occurrences.Where(occurrence => occurrence.Value == maxOccurred)
+                           .Select(o => o.Key)
+                           .First();
+
+            return delimiter;
+        }
+
         private void LoadFile()
         {
-            if (_fileName is not null)
-            {
-                List<string[]> rows = File.ReadAllLines(_fileName)
-                                          .Select(fileName => fileName.Split(_separator)).ToList();
+            if (_fileName is null) return;
 
-                DataTable dataTable = new();
-                rows.OrderBy(row => row.Length).Last().ToList().ForEach(_ => dataTable.Columns.Add());
-                rows.ToList().ForEach(row => dataTable.Rows.Add(row));
-                grdData.DataSource = dataTable;
-            }
+
+            string[] fileLines = File.ReadAllLines(_fileName);
+
+            string fileText = String.Join(Environment.NewLine, fileLines);
+
+            char delimiter = _delimiter == '\0' ? RecognizeDelimiter(fileText) : _delimiter;
+
+            List<string[]> rows = fileLines.Select(line => line.Split(delimiter)).ToList();
+
+            DataTable dataTable = new();
+            rows.OrderBy(row => row.Length).Last().ToList().ForEach(_ => dataTable.Columns.Add());
+            rows.ForEach(row => dataTable.Rows.Add(row));
+            grdData.DataSource = dataTable;
         }
 
         private void btnFile_Click(object sender, EventArgs e)
@@ -44,7 +66,7 @@ namespace CsvEditor
         private void txtSeparator_TextChanged(object sender, EventArgs e)
         {
             TextBox target = (TextBox)sender;
-            _separator = target.Text.Length > 0 ? target.Text[0] : '\0';
+            _delimiter = target.Text.Length > 0 ? target.Text[0] : '\0';
             LoadFile();
         }
 
@@ -55,7 +77,7 @@ namespace CsvEditor
             {
                 DataTable dataTable = (DataTable)grdData.DataSource;
 
-                var data = dataTable.AsEnumerable().Select(row => String.Join(_separator, row.ItemArray));
+                var data = dataTable.AsEnumerable().Select(row => String.Join(_delimiter, row.ItemArray));
                 string text = String.Join(Environment.NewLine, data);
 
                 File.WriteAllText(_fileName, text);
