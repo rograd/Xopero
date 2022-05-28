@@ -26,10 +26,7 @@ namespace CsvEditor
                     .ToDictionary(c => c.Key, c => c.Count());
 
             int maxOccurred = occurrences.Values.Max();
-            char delimiter =
-                occurrences.Where(occurrence => occurrence.Value == maxOccurred)
-                           .Select(o => o.Key)
-                           .First();
+            char delimiter = occurrences.First(occurrence => occurrence.Value == maxOccurred).Key;
 
             return delimiter;
         }

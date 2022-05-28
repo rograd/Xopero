@@ -46,7 +46,7 @@ namespace CsvEditor
             this.txtSeparator.Location = new System.Drawing.Point(446, 10);
             this.txtSeparator.MaxLength = 1;
             this.txtSeparator.Name = "txtSeparator";
-            this.txtSeparator.PlaceholderText = "Separator";
+            this.txtSeparator.PlaceholderText = "Delimiter";
             this.txtSeparator.Size = new System.Drawing.Size(100, 23);
             this.txtSeparator.TabIndex = 1;
             this.txtSeparator.TextChanged += new System.EventHandler(this.txtSeparator_TextChanged);
