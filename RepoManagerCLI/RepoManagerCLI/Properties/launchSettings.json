@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "RepoManagerCLI": {
-      "commandName": "Project",
-      "commandLineArgs": "-n test,lorem,ipsum,dontcare -t your_token"
-    }
-  }
-}
